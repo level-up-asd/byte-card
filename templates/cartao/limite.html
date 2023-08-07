@@ -1,0 +1,45 @@
+{% extends 'template.html' %}
+
+{% block titulo %}
+<section class="container">
+	<h1>Alterar limite</h1>
+</section>
+{% endblock %}
+
+{% block conteudo %}
+<section class="container">
+	<dl class="row">
+		<dt class="col-12 col-md-1">Cliente:</dt>
+		<dd class="col-12 col-md-11">{{ cartao.cliente }}</dd>
+
+		<dt class="col-12 col-md-1">Cartão:</dt>
+		<dd class="col-12 col-md-11">{{ cartao.numero }}</dd>
+
+		<dt class="col-12 col-md-1">Limite:</dt>
+		<dd class="col-12 col-md-11">{{ cartao.limite }}</dd>
+
+		<dt class="col-12 col-md-1">Validade:</dt>
+		<dd class="col-12 col-md-11">{{ cartao.validade }}</dd>
+	</dl>
+</section>
+
+<section class="container mt-5">
+	<form action="/cartoes/alterar-limite" method="post" autocomplete="off">
+		<div class="row">
+			<div class="col-4">
+				<div class="mb-3">
+					<label for="limite" class="form-label">Limite:</label>
+					<input class="form-control" id="limite" name="limite" value="{{ cartao.limite }}" placeholder="Informe o valor do limite de crédito do cartão">
+				</div>
+			</div>
+		</div>
+		<div class="row mt-4">
+			<div class="col">
+				<button type="submit" class="btn btn-success">Alterar</button>
+				<a href="/cartoes/lista" class="btn btn-secondary">Cancelar</a>
+			</div>
+		</div>
+		<input type="hidden" name="id" value="{{ cartao.id }}">
+	</form>
+</section>
+{% endblock %}

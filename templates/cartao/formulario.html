@@ -1,0 +1,34 @@
+{% extends 'template.html' %}
+
+{% block titulo %}
+	<section class="container">
+		<h1>Cadastrar Cartão</h1>
+	</section>
+{% endblock %}
+		
+{% block conteudo %}
+	<section class="container mt-5">
+		<form action="/cartoes/cadastrar" method="post" autocomplete="off">
+			<div class="row">
+				<div class="col-8">
+					<div class="mb-3">
+						<label for="cliente" class="form-label">Cliente:</label>
+						<input class="form-control" id="cliente" name="cliente" placeholder="Digite o nome do cliente">
+					</div>
+				</div>
+				<div class="col-4">
+					<div class="mb-3">
+						<label for="limite" class="form-label">Limite:</label>
+						<input class="form-control" id="limite" name="limite" placeholder="Informe o valor do limite de crédito do cartão">
+					</div>
+				</div>
+			</div>
+			<div class="row mt-4">
+				<div class="col">
+					<button type="submit" class="btn btn-success">Cadastrar</button>
+					<a href="/cartoes/lista" class="btn btn-secondary">Cancelar</a>
+				</div>
+			</div>
+		</form>
+	</section>
+{% endblock %}

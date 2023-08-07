@@ -1,0 +1,57 @@
+{% extends 'template.html' %}
+
+{% block titulo %}
+<section class="container">
+	<h1 class="d-flex justify-content-between align-items-center">
+		<span>Listagem de cartões</span>
+		<a href="/cartoes/formulario" class="btn btn-secondary">Cadastrar novo cartão</a>
+	</h1>
+</section>
+{% endblock %}
+
+{% block conteudo %}
+<section class="container">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Número</th>
+				<th>Cliente</th>
+				<th>Limite</th>
+				<th>Validade</th>
+				<th>Ações</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% if not cartoes %}
+				<tr>
+					<td colspan="5">Nenhum cartão cadastrado.</td>
+				</tr>
+			{% else %}
+				{% for cartao in cartoes %}
+				<tr>
+					<td>{{ cartao.numero }}</td>
+					<td>{{ cartao.cliente }}</td>
+					<td>{{ cartao.limite }}</td>
+					<td>{{ cartao.validade }}</td>
+					<td>
+						<a href="/cartoes/{{ cartao.id }}/limite" class="btn btn-secondary">Alterar limite</a>
+						<a href="/cartoes/{{ cartao.id }}/fatura" class="btn btn-warning">Ver fatura</a>
+
+						{% if cartao.is_ativo %}
+						<a href="/cartoes/{{ cartao.id }}/cancelar" class="btn btn-danger">Cancelar</a>
+						{% endif %}
+						
+						{% if cartao.is_cancelado %}
+						<a href="/cartoes/{{ cartao.id }}/ativar" class="btn btn-primary">Ativar</a>
+						{% endif %}
+					</td>
+				</tr>
+				{% endfor %}
+			{% endif %}
+		</tbody>
+	</table>
+</section>
+{% endblock %}
+		
+		
+		

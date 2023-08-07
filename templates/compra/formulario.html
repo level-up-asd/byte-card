@@ -1,0 +1,57 @@
+{% extends 'template.html' %}
+
+{% block titulo %}
+	<section class="container">
+		<h1>Cadastrar Compra</h1>
+	</section>
+{% endblock %}
+		
+{% block conteudo %}
+	<section class="container mt-5">
+		<form action="/compras/cadastrar" method="post" autocomplete="off">
+			<div class="row">
+				<div class="col-3">
+					<div class="mb-3">
+						<label for="cartao" class="form-label">Cartão:</label>
+						<select class="form-control" id="cartao" name="cartao">
+							<option value="">Selecione o cartão...</option>
+							{% for cartao in cartoes %}
+								<option value="{{ cartao.id }}">{{ cartao.numero }}</option>
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+				<div class="col-3">
+					<div class="mb-3">
+						<label for="valor" class="form-label">Valor:</label>
+						<input class="form-control" id="valor" name="valor">
+					</div>
+				</div>
+				<div class="col-3">
+					<div class="mb-3">
+						<label for="categoria" class="form-label">Categoria:</label>
+						<select class="form-control" id="categoria" name="categoria">
+							<option value="">Selecione a categoria...</option>
+							<option value="Alimentação">Alimentação</option>
+							<option value="Casa">Casa</option>
+							<option value="Lazer">Lazer</option>
+							<option value="Saúde">Saúde</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-3">
+					<div class="mb-3">
+						<label for="estabelecimento" class="form-label">Estabelecimento:</label>
+						<input class="form-control" id="estabelecimento" name="estabelecimento">
+					</div>
+				</div>
+			</div>
+			<div class="row mt-4">
+				<div class="col">
+					<button type="submit" class="btn btn-success">Cadastrar</button>
+					<a href="/cartoes/lista" class="btn btn-secondary">Cancelar</a>
+				</div>
+			</div>
+		</form>
+	</section>
+{% endblock %}

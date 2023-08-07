@@ -1,0 +1,63 @@
+{% extends 'template.html' %}
+
+{% block titulo %}
+	<section class="container">
+		<h1>Visualizar fatura</h1>
+	</section>
+{% endblock %}
+		
+{% block conteudo %}
+	<section class="container mt-5">
+		<dl class="row">
+			<dt class="col-12 col-md-1">Cartão:</dt>
+			<dd class="col-12 col-md-11">{{ cartao.numero }}</dd>
+
+			<dt class="col-12 col-md-1">Cliente:</dt>
+			<dd class="col-12 col-md-11">{{ cartao.cliente }}</dd>
+		</dl>
+
+		<form action="/cartoes/{{ cartao.id }}/fatura" autocomplete="off">
+			<div class="row">
+				<div class="col-3">
+					<div class="mb-3">
+						<label for="mes_ano" class="form-label">Selecione o mês:</label>
+						<input type="month" class="form-control" id="mes_ano" name="mes_ano">
+					</div>
+				</div>
+			</div>
+			<div class="row mt-4">
+				<div class="col">
+					<button type="submit" class="btn btn-success">Visualizar</button>
+					<a href="/cartoes/lista" class="btn btn-secondary">Voltar</a>
+				</div>
+			</div>
+		</form>
+	</section>
+
+	{% if fatura %}
+	<section class="container mt-3">
+		<h3 class="text-center text-primary">Valor total: {{ fatura.total }}</h3>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Data</th>
+					<th>Estabelecimento</th>
+					<th>Categoria</th>
+					<th>Valor</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for compra in fatura.compras %}
+				<tr>
+					<td>{{ compra.data }}</td>
+					<td>{{ compra.estabelecimento }}</td>
+					<td>{{ compra.categoria }}</td>
+					<td>{{ compra.valor }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</section>
+	{% endif %}
+
+{% endblock %}

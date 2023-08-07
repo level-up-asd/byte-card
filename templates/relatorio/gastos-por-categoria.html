@@ -1,0 +1,62 @@
+{% extends 'template.html' %}
+
+{% block titulo %}
+	<section class="container">
+		<h1>Relatório de gastos por categoria</h1>
+	</section>
+{% endblock %}
+		
+{% block conteudo %}
+	<section class="container mt-5">
+		<form action="/relatorios/gastos-por-categoria" autocomplete="off">
+			<div class="row">
+				<div class="col-4">
+					<div class="mb-3">
+						<label for="cartao" class="form-label">Cartão:</label>
+						<select class="form-control" id="cartao" name="cartao">
+							<option value="">Selecione o cartão...</option>
+							{% for cartao in cartoes %}
+								<option value="{{ cartao.id }}">{{ cartao.numero }}</option>
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+				<div class="col-3">
+					<div class="mb-3">
+						<label for="mes_ano" class="form-label">Selecione o mês:</label>
+						<input type="month" class="form-control" id="mes_ano" name="mes_ano">
+					</div>
+				</div>
+			</div>
+			<div class="row mt-4">
+				<div class="col">
+					<button type="submit" class="btn btn-success">Visualizar</button>
+					<a href="/cartoes/lista" class="btn btn-secondary">Voltar</a>
+				</div>
+			</div>
+		</form>
+	</section>
+
+	{% if relatorio %}
+	<section class="container mt-3">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Categoria</th>
+					<th>Valor</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for gasto in relatorio.gastos %}
+				<tr>
+					<td>{{ gasto.categoria }}</td>
+					<td>{{ gasto.valor }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<h3 class="text-center text-primary">Valor total: {{ relatorio.total_gasto }}</h3>
+	</section>
+	{% endif %}
+
+{% endblock %}
